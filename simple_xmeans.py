@@ -43,7 +43,7 @@ class XMeans:
 
             for i in range(k):
                 rn = np.size(np.where(labels == i))
-                var = np.sum((X[labels == i] - m[i])**2)/float(rn - 1)
+                var = sum(np.sum((X[labels == i] - m[i])**2)/float(rn - 1))
                 obic[i] = self.loglikelihood(rn, rn, var, M, 1) - p/2.0*mt.log(rn)
 
             #Split each cluster into two subclusters and calculate BIC of each splitted cluster
@@ -61,7 +61,7 @@ class XMeans:
 
                 for l in range(sk):
                     rn = np.size(np.where(ci_labels == l))
-                    var = np.sum((ci[ci_labels == l] - sm[l])**2)/float(rn - sk)
+                    var = sum(np.sum((ci[ci_labels == l] - sm[l])**2)/float(rn - sk))
                     nbic[i] += self.loglikelihood(r, rn, var, M, sk)
 
                 p = sk * (M + 1)
